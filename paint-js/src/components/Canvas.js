@@ -9,8 +9,8 @@ class Canvas extends Component {
 
     componentDidMount() {
         const canvas = document.createElement("canvas");
-        canvas.width = 300;
-        canvas.height = 300;
+        canvas.width = 500;
+        canvas.height = 500;
         const context = canvas.getContext("2d");
         this.setState({canvas, context});
     }
@@ -37,9 +37,10 @@ class Canvas extends Component {
             console.log("drawing");
 
             // TODO: Don't always get a new context
-            context.strokeStyle = "#df4b26";
+            context.strokeStyle = "#000";
             context.lineJoin = "round";
             context.lineWidth = 5;
+
 
             if (mode === "brush") {
                 context.globalCompositeOperation = "source-over";
@@ -80,9 +81,9 @@ class Canvas extends Component {
                   <Image
                     image={canvas}
                     ref={node => (this.image = node)}
-                    width={300}
-                    height={300}
-                    stroke="blue"
+                    width={500}
+                    height={500}
+                    stroke="#e8e8e8"
                     onMouseDown={this.handleMouseDown}
                     onMouseUp={this.handleMouseUp}
                     onMouseMove={this.handleMouseMove}

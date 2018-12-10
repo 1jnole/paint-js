@@ -1,5 +1,13 @@
-.cnt-header  {
-    h1{
-      color: #fff
+.cnt-header {
+    h1 {
+        color: #fff;
     }
+}
+
+.ant-layout {
+    background: #fff;
+    .ant-layout-has-sider {
+        margin: 1em auto;
+    }
+
 }

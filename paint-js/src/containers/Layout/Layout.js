@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Layout, Row, Col} from 'antd';
 import Canvas from '../../components/Canvas'
-import Tools from '../../components/Tools'
+import DoUndo from '../../components/DoUndo'
+import Palette from '../../components/Palette'
+import Stroke from '../../components/Stroke'
 import './Layout.scss';
 
 const {Header, Content, Sider} = Layout;
@@ -19,7 +21,7 @@ class ContainerLayout extends Component {
    */
     render() {
         return (
-            <Layout>
+            <Layout style={{ background: 'white' }}>
                 <Header className="cnt-header">
                     <Row>
                         <Col span={6}>
@@ -29,7 +31,9 @@ class ContainerLayout extends Component {
                 </Header>
                 <Layout>
                     <Sider className="filters" theme="light">
-                      <Tools/>
+                      <DoUndo/>
+                      <Palette/>
+                      <Stroke/>
                     </Sider>
                     <Layout>
                         <Content className="content">
