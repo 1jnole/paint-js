@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import { Layout, Row, Col } from 'antd';
-import { Stage, Layer } from "react-konva";
+import React, {Component} from 'react';
+import {Layout, Row, Col} from 'antd';
 import Canvas from '../../components/Canvas'
 import './Layout.scss';
-const {Header} = Layout;
 
+const {Header, Content, Sider, Footer} = Layout;
 /**
  * App component is the overall wrapper of this application, this do not contain
  * connection to the data, just contains the corresponding layout
@@ -13,33 +12,31 @@ const {Header} = Layout;
  * @class
  */
 class ContainerLayout extends Component {
-    /**
+  /**
    * Render this Component on each state change
    * @return {React.Component}
    */
-    render() {
-        return (
-            <Layout>
-                <Header className="cnt-header">
-                    <Row>
-                        <Col span={6}>
-                              <h1>Paint App</h1>
-                        </Col>
-                    </Row>
-                </Header>
-
-                <Row>
-                    <Col span={6}>
-                      <Stage width={500} height={500}>
-                         <Layer>
-                             <Canvas/>
-                         </Layer>
-                     </Stage>
-                    </Col>
-                </Row>
-            </Layout>
-        );
-    }
+  render() {
+    return (
+      <Layout>
+        <Header className="cnt-header">
+          <Row>
+            <Col span={6}>
+              <h1>Paint App</h1>
+            </Col>
+          </Row>
+        </Header>
+        <Layout>
+          <Content className="content">
+            <Canvas/>
+          </Content>
+          <Sider className="filters" theme="light">
+            Tools
+          </Sider>
+        </Layout>
+        <Footer>Footer</Footer>
+    </Layout>);
+  }
 }
 
 export default ContainerLayout;
