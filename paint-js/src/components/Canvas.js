@@ -1,35 +1,97 @@
 import React, {Component} from 'react';
-import Konva from "konva";
-import { Stage, Layer, Rect } from "react-konva";
+import {Stage, Layer, Image} from "react-konva";
 
-class ColoredCanvas extends Component {
-  state = {
-      color: "green"
+class Canvas extends Component {
+    state = {
+        isDrawing: false,
+        mode: "brush"
+    }
+
+    componentDidMount() {
+        const canvas = document.createElement("canvas");
+        canvas.width = 300;
+        canvas.height = 300;
+        const context = canvas.getContext("2d");
+        this.setState({canvas, context});
+    }
+
+    handleMouseDown = () => {
+        console.log("mousedown");
+        this.setState({isDrawing: true});
+
+        // TODO: improve
+        const stage = this.image.parent.parent;
+        this.lastPointerPosition = stage.getPointerPosition();
     };
-    handleClick = () => {
-      this.setState({
-        color: Konva.Util.getRandomColor()
-      });
+
+    handleMouseUp = () => {
+        console.log("mouseup");
+        this.setState({isDrawing: false});
     };
+
+    handleMouseMove = () => {
+        // console.log('mousemove');
+        const {context, isDrawing, mode} = this.state;
+
+        if (isDrawing) {
+            console.log("drawing");
+
+            // TODO: Don't always get a new context
+            context.strokeStyle = "#df4b26";
+            context.lineJoin = "round";
+            context.lineWidth = 5;
+
+            if (mode === "brush") {
+                context.globalCompositeOperation = "source-over";
+            } else if (mode === "eraser") {
+                context.globalCompositeOperation = "destination-out";
+            }
+            context.beginPath();
+
+            var localPos = {
+                x: this.lastPointerPosition.x - this.image.x(),
+                y: this.lastPointerPosition.y - this.image.y()
+            };
+            console.log("moveTo", localPos);
+            context.moveTo(localPos.x, localPos.y);
+
+            // TODO: improve
+            const stage = this.image.parent.parent;
+
+            var pos = stage.getPointerPosition();
+            localPos = {
+                x: pos.x - this.image.x(),
+                y: pos.y - this.image.y()
+            };
+            console.log("lineTo", localPos);
+            context.lineTo(localPos.x, localPos.y);
+            context.closePath();
+            context.stroke();
+            this.lastPointerPosition = pos;
+            this.image.getLayer().draw();
+        }
+    };
+
     render() {
-      return (
-        <Stage width={500} height={500}>
-           <Layer>
-             <Rect
-               x={20}
-               y={20}
-               width={500}
-               height={500}
-               fill={this.state.color}
-               shadowBlur={5}
-               onClick={this.handleClick}
-             />
-           </Layer>
-       </Stage>
+       const { canvas } = this.state;
+        return (
+            <Stage width={500} height={500}>
+                <Layer>
+                  <Image
+                    image={canvas}
+                    ref={node => (this.image = node)}
+                    width={300}
+                    height={300}
+                    stroke="blue"
+                    onMouseDown={this.handleMouseDown}
+                    onMouseUp={this.handleMouseUp}
+                    onMouseMove={this.handleMouseMove}
+                  />
+                </Layer>
+            </Stage>
 
-      );
+        );
     }
 }
 
-
-export default ColoredCanvas;
+export default Canvas;
