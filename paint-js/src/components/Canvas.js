@@ -61,7 +61,7 @@ class Canvas extends Component {
             }
             context.beginPath();
 
-            var localPos = {
+            let localPos = {
                 x: this.lastPointerPosition.x - this.image.x(),
                 y: this.lastPointerPosition.y - this.image.y()
             };
@@ -71,7 +71,7 @@ class Canvas extends Component {
             // TODO: improve
             const stage = this.image.parent.parent;
 
-            var pos = stage.getPointerPosition();
+            let pos = stage.getPointerPosition();
             localPos = {
                 x: pos.x - this.image.x(),
                 y: pos.y - this.image.y()
