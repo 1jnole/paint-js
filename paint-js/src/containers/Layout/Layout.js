@@ -3,7 +3,7 @@ import {Layout, Row, Col} from 'antd';
 import Canvas from '../../components/Canvas'
 import DoUndo from '../../components/DoUndo'
 import Palette from '../../components/Palette'
-import Stroke from '../../components/Stroke'
+import CanvasLine from '../../components/Line'
 import './Layout.scss';
 
 const {Header, Content, Sider} = Layout;
@@ -33,7 +33,7 @@ class ContainerLayout extends Component {
                     <Sider className="filters" theme="light">
                       <DoUndo/>
                       <Palette/>
-                      <Stroke/>
+                      <CanvasLine/>
                     </Sider>
                     <Layout>
                         <Content className="content">

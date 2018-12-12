@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Card} from 'antd';
 import {CirclePicker} from 'react-color';
 import store from '../store.js';
+import { changeColour } from '../actionCreators';
 
 class Palette extends Component {
     constructor() {
@@ -11,14 +12,19 @@ class Palette extends Component {
         };
     }
 
-    handleChangeComplete = (color) => {
-        store.dispatch({type: "COLOUR", colour: color.hex})
+    handleChangeComplete = (colour) => {
+      store.dispatch(changeColour(colour.hex));
     };
+
     render() {
         return (
             <Card>
                 <h3>Select a colour</h3>
-                <CirclePicker width="auto" color={this.state.background} onChangeComplete={this.handleChangeComplete}/>
+                <CirclePicker
+                  width="auto"
+                  color={this.state.colour}
+                  onChangeComplete={this.handleChangeComplete}
+                />
             </Card>
         );
     }

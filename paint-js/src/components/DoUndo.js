@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Stage, Layer, Line } from "react-konva";
 import { Card, Icon } from 'antd';
 
 class DoUndo extends Component {
