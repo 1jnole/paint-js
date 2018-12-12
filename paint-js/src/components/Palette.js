@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
 import {Card} from 'antd';
 import {CirclePicker} from 'react-color';
+import store from '../store.js';
 
 class Palette extends Component {
-
-    state = {
-        background: '#fff'
-    };
+    constructor() {
+        super();
+        this.state = {
+            colour: ''
+        };
+    }
 
     handleChangeComplete = (color) => {
-        this.setState({background: color.hex});
+        store.dispatch({type: "COLOUR", colour: color.hex})
     };
     render() {
         return (

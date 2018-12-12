@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
 import {Stage, Layer, Image} from "react-konva";
+import store from '../store.js';
 
 class Canvas extends Component {
-    state = {
-        isDrawing: false,
-        mode: "brush"
+    constructor() {
+        super();
+        this.state = {
+            isDrawing: false,
+            mode: "brush",
+            colour: '',
+        };
+
+        store.subscribe(() => {
+            this.setState({colour: store.getState().colour})
+        })
     }
 
     componentDidMount() {
@@ -37,10 +46,9 @@ class Canvas extends Component {
             console.log("drawing");
 
             // TODO: Don't always get a new context
-            context.strokeStyle = "#000";
+            context.strokeStyle = this.state.colour;
             context.lineJoin = "round";
             context.lineWidth = 5;
-
 
             if (mode === "brush") {
                 context.globalCompositeOperation = "source-over";
@@ -74,20 +82,11 @@ class Canvas extends Component {
     };
 
     render() {
-       const { canvas } = this.state;
+        const {canvas} = this.state;
         return (
             <Stage width={500} height={500}>
                 <Layer>
-                  <Image
-                    image={canvas}
-                    ref={node => (this.image = node)}
-                    width={500}
-                    height={500}
-                    stroke="#e8e8e8"
-                    onMouseDown={this.handleMouseDown}
-                    onMouseUp={this.handleMouseUp}
-                    onMouseMove={this.handleMouseMove}
-                  />
+                    <Image image={canvas} ref={node => (this.image = node)} width={500} height={500} stroke={"#e8e8e8"} onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} onMouseMove={this.handleMouseMove}/>
                 </Layer>
             </Stage>
 
