@@ -1,3 +1,30 @@
-.cnt-header h1 {
-  color: #fff;
+.cnt-header {
+    h1 {
+        color: #fff;
+    }
+}
+
+.ant-layout {
+    background: #fff;
+    .ant-layout-has-sider {
+        margin: 1em auto;
+    }
+
+    h3{
+      text-align: left;
+    }
+    .anticon svg{
+      cursor: pointer;
+      margin-left: 16px;
+    }
+    .ant-card-body{
+      padding: 1.2em;
+    }
+
+    .ant-layout-sider{
+      .line-container div canvas{
+        cursor: pointer;
+      }
+    }
+
 }
