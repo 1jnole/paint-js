@@ -8,7 +8,7 @@ const changeColour = colour => {
 const changeStrokeWidth = strokeWidth => {
     return {
       type: "CHANGE_STROKE_WIDTH",
-      lineSize: strokeWidth
+      strokeWidth: strokeWidth
     }
 };
 

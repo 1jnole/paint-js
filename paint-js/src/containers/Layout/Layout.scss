@@ -20,4 +20,11 @@
     .ant-card-body{
       padding: 1.2em;
     }
+
+    .ant-layout-sider{
+      .line-container div canvas{
+        cursor: pointer;
+      }
+    }
+
 }

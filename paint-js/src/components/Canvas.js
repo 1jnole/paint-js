@@ -9,10 +9,14 @@ class Canvas extends Component {
             isDrawing: false,
             mode: "brush",
             colour: '',
+            strokeWidth: '',
         };
 
         store.subscribe(() => {
-            this.setState({colour: store.getState().colour})
+            this.setState({
+              colour: store.getState().colour,
+              strokeWidth: store.getState().strokeWidth,
+            })
         })
     }
 
@@ -48,7 +52,7 @@ class Canvas extends Component {
             // TODO: Don't always get a new context
             context.strokeStyle = this.state.colour;
             context.lineJoin = "round";
-            context.lineWidth = 1;
+            context.lineWidth = this.state.strokeWidth;
 
             if (mode === "brush") {
                 context.globalCompositeOperation = "source-over";

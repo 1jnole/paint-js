@@ -15,7 +15,7 @@ const reducer = (state, action) => {
         case "CHANGE_STROKE_WIDTH": {
             return {
                 ...state,
-                colour: action.colour
+                strokeWidth: action.strokeWidth
             };
             break;
           }

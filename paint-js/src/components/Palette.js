@@ -22,7 +22,6 @@ class Palette extends Component {
                 <h3>Select a colour</h3>
                 <CirclePicker
                   width="auto"
-                  color={this.state.colour}
                   onChangeComplete={this.handleChangeComplete}
                 />
             </Card>
